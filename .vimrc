@@ -230,7 +230,7 @@ autocmd BufNewFile *.{h,hpp} call l:InsertHTemplate()
 autocmd BufNewFile *.{c,cpp} call l:InsertCTemplate()
 autocmd BufNewFile *.xidl call l:InsertXidlTemplate()
 
-function! InitProject()
+function! InitAcronisProject()
   let l:path = findfile('.is_acronis_project', '.;')
   if (empty(l:path))
     echo "Project file not found"
