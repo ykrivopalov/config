@@ -16,6 +16,7 @@ Bundle 'bufkill.vim'
 Bundle 'gtags.vim'
 Bundle 'vcscommand.vim'
 Bundle 'lukerandall/haskellmode-vim'
+Bundle 'guns/xterm-color-table.vim'
 
 filetype plugin indent on     " required! 
 
@@ -63,7 +64,9 @@ endfunction
 " view
 color desert
 syntax on
-hi ColorColumn guibg=grey25
+highlight ColorColumn guibg=grey25
+highlight Pmenu guibg=#5f875f guifg=#262626
+highlight PmenuSel guibg=#949494 guifg=#262626
 set ruler
 set guioptions-=T
 set guioptions-=l
