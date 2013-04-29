@@ -53,6 +53,9 @@ map <Leader>sW :%s//<C-R><C-W>/g<home><right><right><right>
 map <Leader>sf :.,$s/<C-R><C-W>//gc<left><left><left>
 map <Leader>sF :.,$s//<C-R><C-W>/gc<home><right><right><right><right><right>
 
+map <Leader>td $a /// @todo<Esc>
+map <Leader>te othrow Common::Error(); /// @todo<Esc>
+
 
 " view
 color desert
