@@ -184,17 +184,13 @@ nmap <F2> :python switch_source_header()<CR>
 
 function! InsertHeader()
   normal! i/**
-  normal! o@file
   normal! o
+  normal! i@file
   normal! o@brief   .
-  normal! o
   execute "normal! o@details Copyright (c) 2001-" . strftime("%Y") . " Acronis"
-  normal! o
   normal! o@author  Yury Krivopalov (Yury.Krivopalov@acronis.com)
-  normal! o
-  normal! o@since   $Id
-  normal! o
-  normal! i*/
+  normal! o@since   $Id$
+  normal! o*/
   normal! 2o
 endfunction
 
@@ -206,14 +202,10 @@ function! InsertXidlHeader()
   normal! 2o
 endfunction
 
-function! InsertGuard()
-  let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-  execute "normal! i#ifndef " . gatename
-  execute "normal! o#define " . gatename
-  normal! 2o
-  execute "normal! o#endif /* " . gatename . " */"
-  normal! o
-  normal! 3k
+function! InsertPragmaOnce()
+  normal! i#pragma once
+  normal! 3o
+  normal! k
 endfunction
 
 function! l:InsertCTemplate()
@@ -222,7 +214,7 @@ endfunction
 
 function! l:InsertHTemplate()
   call InsertHeader()
-  call InsertGuard()
+  call InsertPragmaOnce()
 endfunction
 
 function! l:InsertXidlTemplate()
