@@ -195,7 +195,6 @@ function! InsertHeader()
   normal! o@author  Yury Krivopalov (Yury.Krivopalov@acronis.com)
   normal! o@since   $Id$
   normal! o*/
-  normal! 2o
 endfunction
 
 function! InsertXidlHeader()
@@ -203,26 +202,30 @@ function! InsertXidlHeader()
   normal! o[description=.]
   normal! o[header=]
   normal! o[body=]
-  normal! 2o
 endfunction
 
 function! InsertPragmaOnce()
   normal! i#pragma once
-  normal! 3o
-  normal! k
 endfunction
 
 function! l:InsertCTemplate()
   call InsertHeader()
+  normal! 2o
+  normal! k
 endfunction
 
 function! l:InsertHTemplate()
   call InsertHeader()
+  normal! 2o
   call InsertPragmaOnce()
+  normal! 2o
+  normal! k
 endfunction
 
 function! l:InsertXidlTemplate()
   call InsertXidlHeader()
+  normal! 2o
+  normal! k
 endfunction
 
 autocmd BufNewFile *.{h,hpp} call l:InsertHTemplate()
