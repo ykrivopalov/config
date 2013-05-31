@@ -110,6 +110,7 @@ map <C-\> :cclose<CR>:GtagsCursor<CR>
 map <F3> :cclose<CR>:Gtags<SPACE>
 
 " for c++
+set cinoptions+=g0 " for public/private indent
 " Add highlighting for function definition in C++
 function! EnhanceCppSyntax()
   syn match    cCustomParen    "(" contains=cParen contains=cCppParen
