@@ -17,6 +17,8 @@ Bundle 'gtags.vim'
 Bundle 'vcscommand.vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'guns/xterm-color-table.vim'
+Bundle 'tpope/vim-rsi'
+Bundle 'mhinz/vim-startify'
 
 filetype plugin indent on     " required! 
 
