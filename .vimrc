@@ -59,6 +59,12 @@ map <Leader>sF :.,$s//<C-R><C-W>/gc<home><right><right><right><right><right>
 map <Leader>td $a /// @todo<Esc>
 map <Leader>te othrow Common::Error(); /// @todo<Esc>
 
+" shortcuts
+map <Leader>w :w<Enter>
+map <Leader>e :e<Enter>
+map <Leader>n :noh<Enter>
+map ; :
+
 function! PwdCopy()
   redir @p | pwd | redir END
 endfunction
