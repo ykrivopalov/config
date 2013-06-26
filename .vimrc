@@ -71,6 +71,11 @@ function! PwdCopy()
   redir @p | pwd | redir END
 endfunction
 
+function! Unixify()
+  set ff=unix
+  %s#\\#\/#g
+endfunction
+
 " view
 color desert
 syntax on
