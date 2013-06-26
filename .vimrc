@@ -63,6 +63,9 @@ map <Leader>te othrow Common::Error(); /// @todo<Esc>
 map <Leader>w :w<Enter>
 map <Leader>e :e<Enter>
 map <Leader>n :noh<Enter>
+map <Leader>bd :bd<Enter>
+map <Leader>BD :BD<Enter>
+map ; :
 
 function! PwdCopy()
   redir @p | pwd | redir END
