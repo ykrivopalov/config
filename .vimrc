@@ -156,7 +156,7 @@ autocmd BufWinLeave *.{c,h,cpp,hpp,ion,hs,py} call clearmatches()
 
 function! Unixify()
   set ff=unix
-  s#\\#\/#g
+  %s#\\#\/#g
 endfunction
 
 " python scripting
