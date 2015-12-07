@@ -4,13 +4,10 @@ autocmd!
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'FSwitch'
-Plug 'Shougo/vimproc.vim'
 Plug 'bufexplorer.zip'
 Plug 'camelcasemotion'
-Plug 'eagletmt/ghcmod-vim'
-Plug 'gmarik/Vundle.vim'
 Plug 'gtags.vim'
 Plug 'guns/xterm-color-table.vim'
 Plug 'jimsei/winresizer'
@@ -20,7 +17,6 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/syntastic'
 Plug 'ton/vim-bufsurf'
 Plug 'tpope/vim-commentary'
