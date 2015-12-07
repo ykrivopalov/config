@@ -2,3 +2,4 @@ escape ^A^A
 term screen-256color
 defscrollback 10000
 shell "/usr/bin/fish"
+maptimeout 10
