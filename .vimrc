@@ -272,14 +272,14 @@ nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>n <Plug>yankstack_substitute_newer_paste
 
 " new file skeleteons
-autocmd BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
-autocmd BufNewFile *.h 0r ~/.vim/skel/h.skel
-autocmd BufNewFile *.ion 0r ~/.vim/skel/ion.skel
-autocmd BufNewFile *.xidl 0r ~/.vim/skel/xidl.skel
+autocmd BufNewFile *.cpp 0r ~/.config/nvim/skel/cpp.skel
+autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
+autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
+autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
 let g:syntastic_cpp_no_include_search = 1
 let g:syntastic_cpp_no_default_include_dirs = 1
-let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
+let g:syntastic_cpp_compiler_options = '-std=c++03 -Wall -Wextra'
 let g:syntastic_python_checkers = ['pep8', 'pylint', 'python']
 let g:syntastic_python_pep8_args = "--ignore=E501"
 let g:syntastic_python_pylint_args = "--rcfile=/home/yk/Develop/pylint.conf"
@@ -290,6 +290,9 @@ imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
 
 nmap <Leader>ti :GhcModTypeInsert<CR>
 nmap <Leader>tt :GhcModType<CR>
+
+" copy current path
+nmap cp :let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
 
 function! InitAcronisProject()
   let l:path = findfile('family.xml', '.;')
