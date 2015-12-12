@@ -13,3 +13,4 @@ set LC_MEASUREMENT "ru_RU.UTF-8"
 set LC_IDENTIFICATION "ru_RU.UTF-8"
 set LC_ALL ""
 
+set -gx PATH $PATH /usr/local/bin
