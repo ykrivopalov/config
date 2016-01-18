@@ -13,6 +13,7 @@ Plug 'guns/xterm-color-table.vim'
 Plug 'jimsei/winresizer'
 Plug 'justinmk/vim-gtfo'
 Plug 'lyokha/vim-xkbswitch'
+Plug 'majutsushi/tagbar'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
@@ -72,6 +73,7 @@ map <Leader>Bd :Bdelete<Enter>
 map <Leader>BD :Bdelete<Enter>
 map <Leader>w :w<Enter>
 map <Leader>e :e<Enter>
+map <Leader>t :TagbarToggle<Enter>
 map <Leader><Esc> :noh<Enter>
 map ; :
 map K <Nop>
