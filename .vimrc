@@ -24,6 +24,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rsi'
 Plug 'vcscommand.vim'
 Plug 'ykrivopalov/vimcompletesme'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
 
 filetype plugin indent on     " required! 
@@ -143,7 +144,7 @@ sunmap e
 map <C-\> :cclose<CR>:GtagsCursor<CR>
 map <Leader><Leader>r :cclose<CR>:Gtags -r<SPACE>
 map <Leader><Leader>d :cclose<CR>:Gtags -d<SPACE>
-map <Leader><Leader>p :cclose<CR>:Gtags -P<SPACE>
+map <Leader><Leader>p :Locate<CR>
 map <Leader>p :call PwdCopy()<CR>
 map <Leader>q :cclose<CR>
 map - "+
@@ -302,7 +303,8 @@ function! InitAcronisProject()
     echo "Project file not found"
   else
     let l:path = fnamemodify(l:path, ":p:h")
-    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text'
+    let g:project_path = l:path
+    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text' . l:path . '/ext/include'
   endif
 endfunction
 
@@ -318,3 +320,6 @@ function! InitCabalProject()
     execute ':set tags+=' . l:path . '/tags'
   endif
 endfunction
+
+command! Locate call fzf#run(
+      \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e'})
