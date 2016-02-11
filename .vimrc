@@ -16,6 +16,7 @@ Plug 'lyokha/vim-xkbswitch'
 Plug 'majutsushi/tagbar'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mhinz/vim-startify'
+Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/syntastic'
@@ -75,6 +76,7 @@ map <Leader>BD :Bdelete<Enter>
 map <Leader>w :w<Enter>
 map <Leader>e :e<Enter>
 map <Leader>t :TagbarToggle<Enter>
+map <Leader>g :Ack<Space>
 map <Leader><Esc> :noh<Enter>
 map ; :
 map K <Nop>
@@ -281,6 +283,7 @@ autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
 autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '.config/nvim/.ycm_extra_conf.py'
 
 let g:syntastic_disabled_filetypes = ['cxx', 'cpp', 'c']
 let g:syntastic_python_checkers = ['pep8', 'pylint', 'python']
