@@ -14,8 +14,8 @@ Plug 'jimsei/winresizer'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'majutsushi/tagbar'
 Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
-Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/syntastic'
@@ -75,7 +75,7 @@ map <Leader>BD :Bdelete<Enter>
 map <Leader>w :w<Enter>
 map <Leader>e :e<Enter>
 map <Leader>t :TagbarToggle<Enter>
-map <Leader>g :Ack<Space>
+map <Leader>g :Grepper -tool ag<CR>
 map <Leader><Esc> :noh<Enter>
 map ; :
 map K <Nop>
@@ -274,6 +274,9 @@ let g:XkbSwitchIMappings = ['ru']
 " yankstack
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>n <Plug>yankstack_substitute_newer_paste
+
+" Mimic :grep and make ag the default tool.
+let g:grepper = {'tools': ['ag'], 'open':  1, 'jump':  1}
 
 " new file skeleteons
 autocmd BufNewFile *.cpp 0r ~/.config/nvim/skel/cpp.skel
