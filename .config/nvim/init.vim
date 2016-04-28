@@ -12,10 +12,9 @@ Plug 'gtags.vim'
 Plug 'guns/xterm-color-table.vim'
 Plug 'jimsei/winresizer'
 Plug 'lyokha/vim-xkbswitch'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'mhinz/vim-grepper'
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-grepper'
 Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/syntastic'
@@ -75,8 +74,7 @@ map <Leader>BD :Bdelete<Enter>
 map <Leader>w :w<Enter>
 map <Leader>e :e<Enter>
 map <Leader>t :TagbarToggle<Enter>
-map <Leader>g :Grepper -tool ag<CR>
-map <Leader><Esc> :noh<Enter>
+map <Leader><Esc> :noh<CR>:set buftype=""<CR>:cclose<CR>
 map ; :
 map K <Nop>
 
@@ -145,8 +143,7 @@ sunmap e
 map <C-\> :cclose<CR>:GtagsCursor<CR>
 map <Leader><Leader>r :cclose<CR>:Gtags -r<SPACE>
 map <Leader><Leader>d :cclose<CR>:Gtags -d<SPACE>
-map <Leader><Leader>p :Locate<CR>
-map <Leader>p :call PwdCopy()<CR>
+map <Leader><Leader>p :call LocateAcronisProject()<CR>
 map <Leader>q :cclose<CR>
 map - "+
 map _ "+
@@ -284,22 +281,19 @@ autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
 autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
 autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
-let g:syntastic_cpp_no_include_search = 1
-let g:syntastic_cpp_no_default_include_dirs = 1
-let g:syntastic_cpp_compiler_options = '-std=c++03 -Wall -Wextra'
+let g:syntastic_mode_map = { 'passive_filetypes': ['cpp'] }
 let g:syntastic_python_checkers = ['pep8', 'pylint', 'python']
 let g:syntastic_python_pep8_args = "--ignore=E501"
 let g:syntastic_python_pylint_args = "--rcfile=/home/yk/Develop/pylint.conf"
 let g:syntastic_haskell_ghc_mod_exec = '/usr/local/bin/ghc-mod'
 
-map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
-
-nmap <Leader>ti :GhcModTypeInsert<CR>
-nmap <Leader>tt :GhcModType<CR>
+map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
+imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
+nmap <Leader>fj :.,$!python -m json.tool<CR>
+vmap <Leader>fj :%!python -m json.tool<CR>
 
 " copy current path
-nmap cp :let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
+nmap cp :let @a = expand("%:p")<CR>:let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
 
 function! InitAcronisProject()
   let l:path = findfile('family.xml', '.;')
@@ -314,6 +308,13 @@ endfunction
 
 command! InitProject call InitAcronisProject()
 
+function! LocateAcronisProject()
+  if !exists('g:project_path')
+    call InitAcronisProject()
+  endif
+  execute ':Locate'
+endfunction
+
 function! InitCabalProject()
   let l:path = globpath('.,..,../..,../../..', '*.cabal')
   if (empty(l:path))
@@ -326,4 +327,4 @@ function! InitCabalProject()
 endfunction
 
 command! Locate call fzf#run(
-      \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e'})
+      \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
