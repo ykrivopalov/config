@@ -23,6 +23,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rsi'
 Plug 'vcscommand.vim'
 Plug 'ykrivopalov/vimcompletesme'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
 
@@ -281,7 +282,9 @@ autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
 autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
 autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
-let g:syntastic_mode_map = { 'passive_filetypes': ['cpp'] }
+let g:syntastic_cpp_no_include_search = 1
+let g:syntastic_cpp_no_default_include_dirs = 1
+let g:syntastic_cpp_compiler_options = '-std=c++03 -Wall -Wextra'
 let g:syntastic_python_checkers = ['pep8', 'pylint', 'python']
 let g:syntastic_python_pep8_args = "--ignore=E501"
 let g:syntastic_python_pylint_args = "--rcfile=/home/yk/Develop/pylint.conf"
