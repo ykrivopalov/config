@@ -294,6 +294,7 @@ map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
 nmap <Leader>fj :.,$!python -m json.tool<CR>
 vmap <Leader>fj :%!python -m json.tool<CR>
+nmap <Leader>sc :SyntasticCheck<CR>
 
 " copy current path
 nmap cp :let @a = expand("%:p")<CR>:let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
@@ -305,7 +306,8 @@ function! InitAcronisProject()
   else
     let l:path = fnamemodify(l:path, ":p:h")
     let g:project_path = l:path
-    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text' . l:path . '/ext/include'
+    execute ':abbreviate PRJ ' . g:project_path
+    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text,' . l:path . '/ext/include'
   endif
 endfunction
 
