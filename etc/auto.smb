@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# This file must be executable to work! chmod 755!
+
+# Automagically mount CIFS shares in the network, similar to
+# what autofs -hosts does for NFS.
+
+# Put a line like the following in /etc/auto.master:
+# /cifs  /etc/auto.smb --timeout=300
+# You'll be able to access Windows and Samba shares in your network
+# under /cifs/host.domain/share
+
+# "smbclient -L" is used to obtain a list of shares from the given host.
+# In some environments, this requires valid credentials.
+
+# Script reads credentials from the secret-tool
+
+key="$1"
+opts="-fstype=cifs"
+
+for P in /bin /sbin /usr/bin /usr/sbin
+do
+	if [ -x $P/smbclient ]
+	then
+		SMBCLIENT=$P/smbclient
+		break
+	fi
+done
+
+[ -x $SMBCLIENT ] || exit 1
+
+IFS=":" read USERNAME PASSWORD << EOF
+`sudo -u yk secret-tool lookup target $key`
+EOF
+
+smbopts="-U $USERNAME%$PASSWORD"
+
+DOMAIN=
+if [[ $USERNAME == */* ]]
+then IFS="/" read DOMAIN USERNAME << EOF
+`echo $USERNAME`
+EOF
+fi
+
+opts="$opts"',uid=$UID,gid=$GID,username='"$USERNAME,password=$PASSWORD"
+if [ ! -z "$DOMAIN" ]
+then opts="$opts,domain=$DOMAIN"
+fi
+
+$SMBCLIENT $smbopts -gL "$key" 2>/dev/null| awk -v "key=$key" -v "opts=$opts" -F '|' -- '
+	BEGIN	{ ORS=""; first=1 }
+	/Disk/	{
+		  if (first)
+			print opts; first=0
+		  dir = $2
+		  loc = $2
+		  # Enclose mount dir and location in quotes
+		  # Double quote "$" in location as it is special
+		  gsub(/\$$/, "\\$", loc);
+		  gsub(/\&/,"\\\\&",loc)
+		  print " \\\n\t \"/" dir "\"", "\"://" key "/" loc "\""
+		}
+	END 	{ if (!first) print "\n"; else exit 1 }
+	'
+

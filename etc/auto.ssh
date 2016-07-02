@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo '-fstype=fuse.sshfs,uid=$UID,gid=$GID,IdentityFile=/home/yk/.ssh/id_rsa,allow_other '":$1:/"

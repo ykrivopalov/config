@@ -1,0 +1,11 @@
+#
+# Sample auto.master file
+# This is a 'master' automounter map and it has the following format:
+# mount-point [map-type[,format]:]map [options]
+# For details of the format look at auto.master(5).
+#
+/smb	/etc/auto.smb
+/ssh	/etc/auto.ssh
+#
+#
++auto.master
