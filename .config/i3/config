@@ -151,6 +151,7 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+x exec --no-startup-id "pulseaudio-ctl up"
 bindsym $mod+z exec --no-startup-id "pulseaudio-ctl down"
+bindsym $mod+semicolon exec --no-startup-id "i3lock"
 
 bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 10"
