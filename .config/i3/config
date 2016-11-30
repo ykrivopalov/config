@@ -162,3 +162,5 @@ bar {
         status_command i3status | ./.config/i3status/wrapper.sh
         tray_output primary
 }
+
+for_window [class="xfreerdp" instance="xfreerdp"] floating disable
