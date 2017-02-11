@@ -6,25 +6,25 @@ set nocompatible
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'FSwitch'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'bufexplorer.zip'
 Plug 'camelcasemotion'
 Plug 'gtags.vim'
 Plug 'guns/xterm-color-table.vim'
 Plug 'jimsei/winresizer'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'lyokha/vim-xkbswitch'
 Plug 'majutsushi/tagbar'
 Plug 'maxbrunsfeld/vim-yankstack'
-" Plug 'mhinz/vim-grepper'
 Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
+Plug 'neomake/neomake'
 Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/syntastic'
 Plug 'ton/vim-bufsurf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rsi'
 Plug 'vcscommand.vim'
-Plug 'ykrivopalov/vimcompletesme'
+Plug 'zchee/deoplete-clang'
 call plug#end()
 
 filetype plugin indent on     " required! 
@@ -282,19 +282,53 @@ autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
 autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
 autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
-let g:syntastic_cpp_no_include_search = 1
-let g:syntastic_cpp_no_default_include_dirs = 1
-let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
-let g:syntastic_python_checkers = ['pep8', 'pylint', 'python']
-let g:syntastic_python_pep8_args = "--ignore=E501"
-let g:syntastic_python_pylint_args = "--rcfile=/home/yk/Develop/pylint.conf"
-let g:syntastic_haskell_ghc_mod_exec = '/usr/local/bin/ghc-mod'
+
+" deoplete
+
+set completeopt-=preview " no annoying scratch preview
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ deoplete#mappings#manual_complete()
+
+inoremap <silent><expr> <S-TAB>
+  \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+
+" Neomake
+
+autocmd! BufWritePost * Neomake
+let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_clang_maker = {'exe' : 'clang++' }
+let g:neomake_cpp_clang_args = [
+    \ '-std=c++11', '-fsyntax-only',
+    \ '-Wno-deprecated',
+    \ '-Wno-macro-redefined',
+    \ '-I/home/yk/Develop/acronis/main',
+    \ '-I/home/yk/Develop/acronis/main/include',
+    \ '-I/home/yk/Develop/acronis/main/core',
+    \ '-I/home/yk/Develop/acronis/main/core/include',
+    \ '-I/home/yk/Develop/acronis/main/text',
+    \ '-I/home/yk/Develop/acronis/main/ext/include',
+    \ '-DTCHAR_CONSTANT=WCHAR_CONSTANT', '-DNO_EXTERNAL_MESSAGES',
+    \ '-DTCHAR_IS_UINT16', '-DNDEBUG', '-DACRONIS_INTERNAL', '-DTCHAR_IS_WCHAR', '-DFX_UNICODE', '-DFOXDLL', '-DHAVE_ICU', '-DSTATIC_ICU', '-DLINUX_CROSS_AMD64', '-DLIVE_LINUX', '-DLIVE_USERS_OS',
+  \]
+
 
 map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
 nmap <Leader>fj :.,$!python -m json.tool<CR>
 vmap <Leader>fj :%!python -m json.tool<CR>
-nmap <Leader>sc :SyntasticCheck<CR>
 
 " copy current path
 nmap cp :let @a = expand("%:p")<CR>:let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
@@ -307,7 +341,7 @@ function! InitAcronisProject()
     let l:path = fnamemodify(l:path, ":p:h")
     let g:project_path = l:path
     execute ':abbreviate PRJ ' . g:project_path
-    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text,' . l:path . '/ext/include'
+    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text,' . l:path . '/ext/include,' . l:path . '/core,' . l:path . '/core/include'
   endif
 endfunction
 
