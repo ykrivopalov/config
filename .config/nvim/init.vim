@@ -9,6 +9,7 @@ Plug 'FSwitch'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'bufexplorer.zip'
 Plug 'camelcasemotion'
+Plug 'embear/vim-localvimrc'
 Plug 'gtags.vim'
 Plug 'guns/xterm-color-table.vim'
 Plug 'jimsei/winresizer'
@@ -250,7 +251,7 @@ let g:fsnonewfiles = 'on'
 autocmd BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.cc let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.c let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
-autocmd BufEnter *.h let b:fswitchdst = 'cpp,c,cc' | let b:fswitchlocs = '.,..,impl,../impl,src,../src'
+autocmd BufEnter *.h let b:fswitchdst = 'cpp,c,cc' | let b:fswitchlocs = '.,..,impl,../impl,src,../src,../source'
 autocmd BufEnter text.h let b:fullswitchdst = 'english.txt'
 autocmd BufEnter english.txt let b:fullswitchdst = 'text.h'
 
@@ -310,20 +311,9 @@ inoremap <silent><expr> <S-TAB>
 autocmd! BufWritePost * Neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang++' }
-let g:neomake_cpp_clang_args = [
-    \ '-std=c++11', '-fsyntax-only',
-    \ '-Wno-deprecated',
-    \ '-Wno-macro-redefined',
-    \ '-I/home/yk/Develop/acronis/main',
-    \ '-I/home/yk/Develop/acronis/main/include',
-    \ '-I/home/yk/Develop/acronis/main/core',
-    \ '-I/home/yk/Develop/acronis/main/core/include',
-    \ '-I/home/yk/Develop/acronis/main/text',
-    \ '-I/home/yk/Develop/acronis/main/ext/include',
-    \ '-DTCHAR_CONSTANT=WCHAR_CONSTANT', '-DNO_EXTERNAL_MESSAGES',
-    \ '-DTCHAR_IS_UINT16', '-DNDEBUG', '-DACRONIS_INTERNAL', '-DTCHAR_IS_WCHAR', '-DFX_UNICODE', '-DFOXDLL', '-DHAVE_ICU', '-DSTATIC_ICU', '-DLINUX_CROSS_AMD64', '-DLIVE_LINUX', '-DLIVE_USERS_OS',
-  \]
+" Compilation flags placed in local vimrc for each project separately
 
+let g:localvimrc_ask = 0 " don't ask confirmation for local vimrc loading
 
 map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
