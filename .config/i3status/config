@@ -13,6 +13,8 @@ general {
 }
 
 order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "cpu_temperature 1"
 order += "load"
 order += "disk /"
 order += "disk /home/"
@@ -24,6 +26,16 @@ order += "tztime local"
 
 cpu_usage {
         format = "CPU: %usage"
+}
+
+cpu_temperature 0 {
+        format = "%degrees"
+        path = "/sys/bus/acpi/devices/LNXTHERM:00/thermal_zone/temp"
+}
+
+cpu_temperature 1 {
+        format = "%degrees °C"
+        path = "/sys/bus/acpi/devices/LNXTHERM:01/thermal_zone/temp"
 }
 
 load {
