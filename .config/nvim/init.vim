@@ -21,6 +21,7 @@ Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
 Plug 'neomake/neomake'
 Plug 'rust-lang/rust.vim'
+Plug 's3rvac/AutoFenc'
 Plug 'ton/vim-bufsurf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rsi'
@@ -314,6 +315,10 @@ let g:neomake_cpp_clang_maker = {'exe' : 'clang++' }
 " Compilation flags placed in local vimrc for each project separately
 
 let g:localvimrc_ask = 0 " don't ask confirmation for local vimrc loading
+
+" Auto file encoding detection. Used hacked enca, that show ucs-2le instead just usc-2
+let g:autofenc_ext_prog_path='enca_vim.sh'
+let g:autofenc_ext_prog_args=''
 
 map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
