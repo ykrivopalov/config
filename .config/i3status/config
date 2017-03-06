@@ -17,7 +17,7 @@ order += "cpu_temperature 0"
 order += "cpu_temperature 1"
 order += "load"
 order += "disk /"
-order += "disk /home/"
+order += "disk /home"
 order += "path_exists VPN"
 order += "wireless _first_"
 order += "ethernet _first_"
@@ -69,7 +69,7 @@ disk "/" {
         format = "/: %avail"
 }
 
-disk "/home/" {
+disk "/home" {
         format = "/home: %avail"
 }
 
