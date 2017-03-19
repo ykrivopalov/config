@@ -1,136 +1,137 @@
-" reset
+" reset all autocommands (for safe vimrc reloading)
 autocmd!
 
-" Use Vim settings, rather than Vi settings (much better!).
-set nocompatible
+set nocompatible  " Use Vim settings, rather than Vi settings
 
+
+" vim-plug pluggins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'FSwitch'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'bufexplorer.zip'
-Plug 'camelcasemotion'
-Plug 'embear/vim-localvimrc'
-Plug 'gtags.vim'
-Plug 'guns/xterm-color-table.vim'
-Plug 'jimsei/winresizer'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'lyokha/vim-xkbswitch'
-Plug 'majutsushi/tagbar'
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'moll/vim-bbye'
-Plug 'morhetz/gruvbox'
-Plug 'neomake/neomake'
-Plug 'rust-lang/rust.vim'
-Plug 's3rvac/AutoFenc'
-Plug 'ton/vim-bufsurf'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-rsi'
-Plug 'vcscommand.vim'
-Plug 'zchee/deoplete-clang'
+Plug 'FSwitch'  " switching between header and source
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " keyword completion
+Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
+Plug 'bufexplorer.zip'  " buffers explorer
+Plug 'embear/vim-localvimrc'  " .localvimrc support
+Plug 'gtags.vim'  " support for GNU global tags system
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
+Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
+Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
+Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
+Plug 'moll/vim-bbye'  " delete buffers without closing windows 
+Plug 'morhetz/gruvbox'  " color scheme
+Plug 'neomake/neomake'  " asynchronous linting and make
+Plug 'rust-lang/rust.vim'  " rust file detection, syntax highlighting, formatting
+Plug 's3rvac/AutoFenc'  " automatically detect and set file encoding when opening a file.
+Plug 'simeji/winresizer'  " easy resizing of vim windows
+Plug 'ton/vim-bufsurf'  " surfing through buffers based on viewing history
+Plug 'tpope/vim-commentary'  " comment stuff out
+Plug 'tpope/vim-rsi'  " readline key bindings
+Plug 'vcscommand.vim'  " VCS integration
+Plug 'zchee/deoplete-clang'  " C/C++ source for deoplete
 call plug#end()
-
-filetype plugin indent on     " required! 
 
 
 " russian
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=-1
+set keymap=russian-jcukenwin  " russian keyboard mapping
+set iminsert=0  " disable vim's input method switching for insert
+set imsearch=-1  " disable vim's input method switching for search
 
 if has('win32')
-  set guifont=Consolas:h10:cRUSSIAN
-  "set encoding=utf-8
+  set guifont=Consolas:h10:cRUSSIAN  " proper font for Windows
 endif
 
 
-" edit
-filetype plugin on
+" filetype detection
+filetype on  " enable file type detection
+filetype plugin on  " loading the plugins for specific file types
+filetype indent on  " loading the indent file for specific file types
+
+syntax on  " syntax highlighting
+
+" identing and tabbing
 set autoindent
-set shiftwidth=2
-set expandtab
-set tabstop=8
-set softtabstop=2
-set smarttab
-set showbreak=>
-set colorcolumn=80
-set cursorline
-set backspace=indent,eol,start
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+set expandtab  " insert spaces instead of <Tab> in insert mode
+set shiftwidth=2  " number of spaces to use for each step of (auto)indent
+set smarttab  " delete spaces count of <Tab> size
+set softtabstop=2  " number of spaces that a <Tab> counts for while performing editing
+set tabstop=8  " number of spaces that a <Tab> in the file counts for
 
-let mapleader = "\<TAB>"
-nnoremap <C-l> <C-i>
 
-" substitution mappings
-map <Leader>ss :%s/
-map <Leader>sw :%s/<C-R><C-W>//g<left><left>
-map <Leader>sW :%s//<C-R><C-W>/g<home><right><right><right>
-map <Leader>sf :.,$s/<C-R><C-W>//gc<left><left><left>
-map <Leader>sF :.,$s//<C-R><C-W>/gc<home><right><right><right><right><right>
-
-map <Leader>td $a /// @todo<Esc>
-map <Leader>te othrow Common::Error(LINE_TAG, 42); /// @todo<Esc>
-
-" shortcuts
-map <Leader>bd :bd<Enter>
-map <Leader>Bd :Bdelete<Enter>
-map <Leader>BD :Bdelete<Enter>
-map <Leader>w :w<Enter>
-map <Leader>e :e<Enter>
-map <Leader>t :TagbarToggle<Enter>
-map <Leader><Esc> :noh<CR>:set buftype=""<CR>:cclose<CR>
-map ; :
-map K <Nop>
-
-function! PwdCopy()
-  redir @p | pwd | redir END
-endfunction
-
-function! Unixify()
-  set ff=unix
-  %s#\\#\/#g
-endfunction
-
-" view
-colorscheme gruvbox
-set bg=dark
-if !has("gui_running")
-   let g:gruvbox_italic=0
-endif
-
-syntax on
-set ruler
-set guioptions-=T
-set guioptions-=l
-set guioptions-=r
-set guioptions-=b
-set guioptions-=L
-set guioptions-=m
-set guioptions+=c
-set guicursor+=a:blinkon0
-
-set hlsearch
-set incsearch
-
-set laststatus=2 " filename bottom
-
-" autocomplete in command mode
+" behavior
+set autochdir  " chage current working directory whenever file opened
+set backspace=start,indent,eol  " backspacing over start of insert, autoindent, line breaks
+set hidden  " don't unload abandoned buffers
+set hlsearch  " higlight all search matches
+set incsearch  " show matches while typing
+set wildmenu  " autocomplete in command mode
 set wildmode=longest,list,full
-set wildmenu
 
-set complete-=i
 
-" work
-set autochdir
-" autocmd BufEnter * silent! lcd %:p:h
-set hidden
+" status line
+set colorcolumn=80  " column highlighting
+set cursorline  " current line highlighting
+set laststatus=2  " always show a status line
+set ruler  " show the line and column number
+set showbreak=>  " symbol that indetifies line start after break
 
+
+" GVim UI setup
+set guicursor+=a:blinkon0
+set guioptions+=c
+set guioptions-=L
+set guioptions-=T
+set guioptions-=b
+set guioptions-=l
+set guioptions-=m
+set guioptions-=r
+
+
+" temp files placement
 if has('unix')
   set directory=~/tmp,/var/tmp,/tmp
-  set backupdir=~/tmp,~/
+  set backupdir=~/tmp,/var/tmp,/tmp
 elseif has('win32')
   set directory=c:/tmp,c:/temp
   set backupdir =c:/tmp,c:/temp
 endif
+
+
+" color scheme setup
+colorscheme gruvbox
+set background=dark
+if !has("gui_running")
+   let g:gruvbox_italic=0
+endif
+
+
+let mapleader = "\<Tab>"  " alias for the <Leader> key
+" remap for <C-i>, because it interpreted by Vim as a <Tab>
+nnoremap <C-l> <C-i>
+
+" substitution mappings
+map <Leader>ss :%s/
+map <Leader>sf :.,$s/<C-R><C-W>//gc<left><left><left>
+map <Leader>sF :.,$s//<C-R><C-W>/gc<home><right><right><right><right><right>
+map <Leader>sw :%s/<C-R><C-W>//g<left><left>
+map <Leader>sW :%s//<C-R><C-W>/g<home><right><right><right>
+
+" todo comments mappings
+map <Leader>td $a /// @todo<Esc>
+map <Leader>te othrow Common::Error(LINE_TAG, 42); /// @todo<Esc>
+
+" shortcuts for editing
+map ; :
+map <Leader><Esc> :noh<CR>:set buftype=""<CR>:cclose<CR>
+map <Leader>BD :Bdelete<Enter>
+map <Leader>Bd :Bdelete<Enter>
+map <Leader>bd :bd<Enter>
+map <Leader>e :e<Enter>
+map <Leader>t :TagbarToggle<Enter>
+map <Leader>w :w<Enter>
+
+
+" disable keyword lookup
+map K <Nop>
+
 
 " plugins maps
 map <C-p> :BufSurfBack<CR>
@@ -146,14 +147,14 @@ sunmap e
 map <C-\> :cclose<CR>:GtagsCursor<CR>
 map <Leader><Leader>r :cclose<CR>:Gtags -r<SPACE>
 map <Leader><Leader>d :cclose<CR>:Gtags -d<SPACE>
-map <Leader><Leader>p :call LocateAcronisProject()<CR>
 map <Leader>q :cclose<CR>
 map - "+
 map _ "+
 map + "+
 
+
 " for c++
-set cinoptions+=g0 " for public/private indent
+set cinoptions+=g0  " for public/private indent
 " Add highlighting for function definition in C++
 function! EnhanceCppSyntax()
   syn match    cCustomParen    "(" contains=cParen contains=cCppParen
@@ -171,13 +172,16 @@ autocmd BufEnter *.{hs,cabal} setlocal shiftwidth=4
 autocmd BufEnter *.{hs,cabal} setlocal softtabstop=4
 autocmd BufEnter *.{hs,cabal} setlocal cmdheight=1
 
+
 " for python
 autocmd BufEnter *.{py} setlocal shiftwidth=4
 autocmd BufEnter *.{py} setlocal softtabstop=4
 
+
 " for markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:netrw_browsex_viewer = "xdg-open"
+
 
 " trailing spaces
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -186,10 +190,6 @@ autocmd InsertEnter *.{c,h,cpp,hpp,ion,hs,py,md} match ExtraWhitespace /\s\+\%#\
 autocmd InsertLeave *.{c,h,cpp,hpp,ion,hs,py,md} match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave *.{c,h,cpp,hpp,ion,hs,py,md} call clearmatches()
 
-function! Unixify()
-  set ff=unix
-  s#\\#\/#g
-endfunction
 
 function! GetVisualSelection()
   try
@@ -247,15 +247,20 @@ endpython
   vmap <Leader>vc :call ConvertSelected()<CR>
 endif
 
+
 " header/source switches
 let g:fsnonewfiles = 'on'
 autocmd BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.cc let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.c let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.h let b:fswitchdst = 'cpp,c,cc' | let b:fswitchlocs = '.,..,impl,../impl,src,../src,../source'
+
+
+" Acronis localization files
 autocmd BufEnter text.h let b:fullswitchdst = 'english.txt'
 autocmd BufEnter english.txt let b:fullswitchdst = 'text.h'
 
+" Switch that support Acronis files
 function! FullSwitchFile()
   if exists('b:fullswitchdst')
     execute ":e " . b:fullswitchdst
@@ -268,17 +273,13 @@ nmap <Leader>h :call FullSwitchFile()<CR>
 
 " xkbswitch
 let g:XkbSwitchEnabled = 1
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
-let g:XkbSwitchIMappings = ['ru']
 
 " yankstack
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>n <Plug>yankstack_substitute_newer_paste
 
-" Mimic :grep and make ag the default tool.
-let g:grepper = {'tools': ['ag'], 'open':  1, 'jump':  1}
 
-" new file skeleteons
+" new file skeletons
 autocmd BufNewFile *.cpp 0r ~/.config/nvim/skel/cpp.skel
 autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
 autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
@@ -286,9 +287,7 @@ autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
 
 " deoplete
-
 set completeopt-=preview " no annoying scratch preview
-
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
@@ -308,26 +307,36 @@ inoremap <silent><expr> <S-TAB>
 
 
 " Neomake
-
 autocmd! BufWritePost * Neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang++' }
 " Compilation flags placed in local vimrc for each project separately
 
+
+" localvimrc
 let g:localvimrc_ask = 0 " don't ask confirmation for local vimrc loading
+
 
 " Auto file encoding detection. Used hacked enca, that show ucs-2le instead just usc-2
 let g:autofenc_ext_prog_path='enca_vim.sh'
 let g:autofenc_ext_prog_args=''
 
+
+" format buffer with clang
 map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
+
+
+" format json buffer or selection
 nmap <Leader>fj :.,$!python -m json.tool<CR>
 vmap <Leader>fj :%!python -m json.tool<CR>
+
 
 " copy current path
 nmap cp :let @a = expand("%:p")<CR>:let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
 
+
+" setup for Acronis project
 function! InitAcronisProject()
   let l:path = findfile('family.xml', '.;')
   if (empty(l:path))
@@ -340,25 +349,18 @@ function! InitAcronisProject()
   endif
 endfunction
 
-command! InitProject call InitAcronisProject()
 
-function! LocateAcronisProject()
+" fzf
+command! Locate call fzf#run(
+      \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
+
+
+function! LocateInAcronisProject()
+  " init project path before search
   if !exists('g:project_path')
     call InitAcronisProject()
   endif
   execute ':Locate'
 endfunction
 
-function! InitCabalProject()
-  let l:path = globpath('.,..,../..,../../..', '*.cabal')
-  if (empty(l:path))
-    echo "Cabal file not found"
-  else
-    let l:path = fnamemodify(l:path, ":p:h")
-    execute ':set path=' . '.,' . l:path . ',' . l:path . '/src'
-    execute ':set tags+=' . l:path . '/tags'
-  endif
-endfunction
-
-command! Locate call fzf#run(
-      \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
+map <Leader><Leader>p :call LocateInAcronisProject()<CR>
