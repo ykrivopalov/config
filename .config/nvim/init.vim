@@ -107,6 +107,7 @@ let mapleader = "\<Tab>"  " alias for the <Leader> key
 " remap for <C-i>, because it interpreted by Vim as a <Tab>
 nnoremap <C-l> <C-i>
 
+
 " substitution mappings
 map <Leader>ss :%s/
 map <Leader>sf :.,$s/<C-R><C-W>//gc<left><left><left>
@@ -114,43 +115,27 @@ map <Leader>sF :.,$s//<C-R><C-W>/gc<home><right><right><right><right><right>
 map <Leader>sw :%s/<C-R><C-W>//g<left><left>
 map <Leader>sW :%s//<C-R><C-W>/g<home><right><right><right>
 
+
 " todo comments mappings
 map <Leader>td $a /// @todo<Esc>
 map <Leader>te othrow Common::Error(LINE_TAG, 42); /// @todo<Esc>
 
+
 " shortcuts for editing
 map ; :
-map <Leader><Esc> :noh<CR>:set buftype=""<CR>:cclose<CR>
 map <Leader>BD :Bdelete<Enter>
 map <Leader>Bd :Bdelete<Enter>
 map <Leader>bd :bd<Enter>
 map <Leader>e :e<Enter>
-map <Leader>t :TagbarToggle<Enter>
 map <Leader>w :w<Enter>
+
+
+" reset editing state
+map <Leader><Esc> :nohlsearch<CR>:set buftype=""<CR>:cclose<CR>
 
 
 " disable keyword lookup
 map K <Nop>
-
-
-" plugins maps
-map <C-p> :BufSurfBack<CR>
-map <C-n> :BufSurfForward<CR>
-
-map w <Plug>CamelCaseMotion_w
-map b <Plug>CamelCaseMotion_b
-map e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
-
-map <C-\> :cclose<CR>:GtagsCursor<CR>
-map <Leader><Leader>r :cclose<CR>:Gtags -r<SPACE>
-map <Leader><Leader>d :cclose<CR>:Gtags -d<SPACE>
-map <Leader>q :cclose<CR>
-map - "+
-map _ "+
-map + "+
 
 
 " for c++
@@ -189,6 +174,28 @@ autocmd BufWinEnter *.{c,h,cpp,hpp,ion,hs,py,md} match ExtraWhitespace /\s\+$/
 autocmd InsertEnter *.{c,h,cpp,hpp,ion,hs,py,md} match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave *.{c,h,cpp,hpp,ion,hs,py,md} match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave *.{c,h,cpp,hpp,ion,hs,py,md} call clearmatches()
+
+
+" plugins maps
+map <C-p> :BufSurfBack<CR>
+map <C-n> :BufSurfForward<CR>
+
+map w <Plug>CamelCaseMotion_w
+map b <Plug>CamelCaseMotion_b
+map e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
+map <Leader>t :TagbarToggle<Enter>
+
+map <C-\> :cclose<CR>:GtagsCursor<CR>
+map <Leader><Leader>r :cclose<CR>:Gtags -r<SPACE>
+map <Leader><Leader>d :cclose<CR>:Gtags -d<SPACE>
+map <Leader>q :cclose<CR>
+map - "+
+map _ "+
+map + "+
 
 
 function! GetVisualSelection()
