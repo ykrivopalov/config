@@ -17,7 +17,7 @@ Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mod
 Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
 Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
 Plug 'moll/vim-bbye'  " delete buffers without closing windows 
-Plug 'morhetz/gruvbox'  " color scheme
+Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'neomake/neomake'  " asynchronous linting and make
 Plug 'rust-lang/rust.vim'  " rust file detection, syntax highlighting, formatting
 Plug 's3rvac/AutoFenc'  " automatically detect and set file encoding when opening a file.
@@ -27,6 +27,7 @@ Plug 'tpope/vim-commentary'  " comment stuff out
 Plug 'tpope/vim-rsi'  " readline key bindings
 Plug 'vcscommand.vim'  " VCS integration
 Plug 'zchee/deoplete-clang'  " C/C++ source for deoplete
+Plug 'neovimhaskell/haskell-vim'  " haskell syntax highlighting
 call plug#end()
 
 
@@ -62,6 +63,7 @@ set backspace=start,indent,eol  " backspacing over start of insert, autoindent, 
 set hidden  " don't unload abandoned buffers
 set hlsearch  " higlight all search matches
 set incsearch  " show matches while typing
+set tags=tags;  " show tags upward from current dir
 set wildmenu  " autocomplete in command mode
 set wildmode=longest,list,full
 
