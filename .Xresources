@@ -99,7 +99,7 @@ URxvt.color15 : #FFFFFF
 ! URxvt*borderColor:                    color
 ! URxvt*iconFile:                       file
 ! URxvt*font:                           fontname
-URxvt*font: xft:monospace:size=10
+URxvt*font: xft:Ubuntu Mono:size=12
 ! URxvt*boldFont:                       fontname
 ! URxvt*italicFont:                     fontname
 ! URxvt*boldItalicFont:                 fontname
