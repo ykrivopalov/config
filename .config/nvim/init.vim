@@ -7,6 +7,7 @@ set nocompatible  " Use Vim settings, rather than Vi settings
 " vim-plug pluggins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'FSwitch'  " switching between header and source
+Plug 'IN3D/vim-raml'  " syntax and language settings for RAML
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " keyword completion
 Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
 Plug 'bufexplorer.zip'  " buffers explorer
