@@ -165,6 +165,11 @@ autocmd BufEnter *.{hs,cabal} setlocal cmdheight=1
 autocmd BufEnter *.{py} setlocal shiftwidth=4
 autocmd BufEnter *.{py} setlocal softtabstop=4
 
+" for go
+autocmd BufEnter *.{go} setlocal shiftwidth=4
+autocmd BufEnter *.{go} setlocal noexpandtab
+autocmd BufEnter *.{go} setlocal softtabstop=0
+autocmd BufEnter *.{go} setlocal tabstop=4
 
 " for markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
