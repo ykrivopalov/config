@@ -375,7 +375,11 @@ function! LocateInAcronisProject()
   if !exists('g:project_path')
     call InitAcronisProject()
   endif
-  execute ':Locate'
+  if !exists('g:project_path')
+    execute 'FZF'
+  else
+    execute ':Locate'
+  endif
 endfunction
 
 map <Leader><Leader>p :call LocateInAcronisProject()<CR>
