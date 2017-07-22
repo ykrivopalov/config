@@ -11,14 +11,15 @@ Plug 'IN3D/vim-raml'  " syntax and language settings for RAML
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " keyword completion
 Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
 Plug 'bufexplorer.zip'  " buffers explorer
+Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'embear/vim-localvimrc'  " .localvimrc support
 Plug 'gtags.vim'  " support for GNU global tags system
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
 Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
 Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
 Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
+Plug 'mileszs/ack.vim'  " code grepping
 Plug 'moll/vim-bbye'  " delete buffers without closing windows 
-Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'neomake/neomake'  " asynchronous linting and make
 Plug 'rust-lang/rust.vim'  " rust file detection, syntax highlighting, formatting
 Plug 's3rvac/AutoFenc'  " automatically detect and set file encoding when opening a file.
@@ -290,8 +291,8 @@ nmap <Leader>h :call FullSwitchFile()<CR>
 let g:XkbSwitchEnabled = 1
 
 " yankstack
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>n <Plug>yankstack_substitute_newer_paste
+nmap <Leader>p <Plug>yankstack_substitute_older_paste
+nmap <Leader>n <Plug>yankstack_substitute_newer_paste
 
 
 " new file skeletons
@@ -299,6 +300,11 @@ autocmd BufNewFile *.cpp 0r ~/.config/nvim/skel/cpp.skel
 autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
 autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
 autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
+
+
+" ack
+let g:ackprg = 'rg --vimgrep'
+nmap <Leader><Leader>g :Ack 
 
 
 " deoplete
