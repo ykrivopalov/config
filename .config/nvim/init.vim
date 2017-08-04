@@ -13,6 +13,7 @@ Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
 Plug 'bufexplorer.zip'  " buffers explorer
 Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'embear/vim-localvimrc'  " .localvimrc support
+Plug 'fatih/vim-go', { 'tag': '*' }  " Go development plugin for Vim
 Plug 'gtags.vim'  " support for GNU global tags system
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
 Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
