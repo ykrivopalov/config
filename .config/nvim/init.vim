@@ -71,6 +71,11 @@ set wildmenu  " autocomplete in command mode
 set wildmode=longest,list,full
 
 
+" disable automatically insertion of comments after Enter and o/O
+set formatoptions-=r
+set formatoptions-=o
+
+
 " status line
 set colorcolumn=80  " column highlighting
 set cursorline  " current line highlighting
