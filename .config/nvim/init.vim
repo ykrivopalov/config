@@ -6,15 +6,14 @@ set nocompatible  " Use Vim settings, rather than Vi settings
 
 " vim-plug pluggins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'FSwitch'  " switching between header and source
 Plug 'IN3D/vim-raml'  " syntax and language settings for RAML
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " keyword completion
 Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
-Plug 'bufexplorer.zip'  " buffers explorer
+Plug 'derekwyatt/vim-fswitch'  " switching between header and source
 Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'embear/vim-localvimrc'  " .localvimrc support
 Plug 'fatih/vim-go', { 'tag': '*' }  " Go development plugin for Vim
-Plug 'gtags.vim'  " support for GNU global tags system
+Plug 'jlanzarotta/bufexplorer'  " buffers explorer
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
 Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
 Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
@@ -22,15 +21,16 @@ Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
 Plug 'mileszs/ack.vim'  " code grepping
 Plug 'moll/vim-bbye'  " delete buffers without closing windows 
 Plug 'neomake/neomake'  " asynchronous linting and make
+Plug 'neovimhaskell/haskell-vim'  " haskell syntax highlighting
 Plug 'rust-lang/rust.vim'  " rust file detection, syntax highlighting, formatting
 Plug 's3rvac/AutoFenc'  " automatically detect and set file encoding when opening a file.
 Plug 'simeji/winresizer'  " easy resizing of vim windows
 Plug 'ton/vim-bufsurf'  " surfing through buffers based on viewing history
 Plug 'tpope/vim-commentary'  " comment stuff out
 Plug 'tpope/vim-rsi'  " readline key bindings
-Plug 'vcscommand.vim'  " VCS integration
+Plug 'vim-scripts/gtags.vim'  " support for GNU global tags system
+Plug 'vim-scripts/vcscommand.vim'  " VCS integration
 Plug 'zchee/deoplete-clang'  " C/C++ source for deoplete
-Plug 'neovimhaskell/haskell-vim'  " haskell syntax highlighting
 call plug#end()
 
 
