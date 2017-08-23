@@ -341,6 +341,17 @@ inoremap <silent><expr> <S-TAB>
 autocmd! BufWritePost * Neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang++' }
+
+let g:neomake_python_enabled_makers = ['pylint']
+let g:neomake_python_pylint_maker = {
+  \ 'args': [
+  \ '-d', 'C0301',
+  \ '-d', 'C0103',
+  \ '-f', 'text',
+  \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
+  \ '-r', 'n'
+  \ ]
+  \ }
 " Compilation flags placed in local vimrc for each project separately
 
 
