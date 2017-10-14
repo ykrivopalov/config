@@ -5,7 +5,6 @@
 # For details of the format look at auto.master(5).
 #
 /smb	/etc/autofs/auto.smb
-/ssh	/etc/autofs/auto.ssh
 #
 #
 +auto.master
