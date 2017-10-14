@@ -122,7 +122,7 @@ URxvt*font: xft:Ubuntu Mono:size=12
 ! URxvt*borderLess:                     boolean
 ! URxvt*lineSpace:                      number
 ! URxvt*letterSpace:                    number
-URxvt*letterSpace:         -1
+URxvt*letterSpace:         0
 ! URxvt*skipBuiltinGlyphs:              boolean
 ! URxvt*pointerBlankDelay:              number
 ! URxvt*backspacekey:                   string
