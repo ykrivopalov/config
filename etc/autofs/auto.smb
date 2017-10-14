@@ -30,7 +30,7 @@ done
 [ -x $SMBCLIENT ] || exit 1
 
 IFS=":" read USERNAME PASSWORD << EOF
-`sudo -u yk secret-tool lookup target $key`
+`sudo -u yk pass show hosts/$key`
 EOF
 
 smbopts="-U $USERNAME%$PASSWORD"
