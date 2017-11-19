@@ -152,7 +152,7 @@ map K <Nop>
 " for c++
 
 " map GtagsCursor like standard hotkey for tags
-autocmd FileType c,cpp,h,hpp nnoremap <buffer> <C-]> :GtagsCursor<CR>
+autocmd FileType c,cpp,h,hpp nnoremap <buffer> <C-]> :cclose<CR>:GtagsCursor<CR>
 
 set cinoptions+=g0  " for public/private indent
 " Add highlighting for function definition in C++
