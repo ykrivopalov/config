@@ -22,6 +22,7 @@ Plug 'mileszs/ack.vim'  " code grepping
 Plug 'moll/vim-bbye'  " delete buffers without closing windows 
 Plug 'neomake/neomake'  " asynchronous linting and make
 Plug 'neovimhaskell/haskell-vim'  " haskell syntax highlighting
+Plug 'racer-rust/vim-racer'  " allows vim to use Racer for Rust code completion and navigation
 Plug 'rust-lang/rust.vim'  " rust file detection, syntax highlighting, formatting
 Plug 's3rvac/AutoFenc'  " automatically detect and set file encoding when opening a file.
 Plug 'simeji/winresizer'  " easy resizing of vim windows
@@ -181,6 +182,12 @@ autocmd BufEnter *.{go} setlocal shiftwidth=4
 autocmd BufEnter *.{go} setlocal noexpandtab
 autocmd BufEnter *.{go} setlocal softtabstop=0
 autocmd BufEnter *.{go} setlocal tabstop=4
+
+" for rust
+autocmd FileType rust nmap gd <Plug>(rust-def)
+autocmd FileType rust nmap gs <Plug>(rust-def-split)
+autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
+autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " for markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
