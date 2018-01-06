@@ -344,9 +344,7 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ deoplete#mappings#manual_complete()
+  \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
 inoremap <silent><expr> <S-TAB>
   \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
