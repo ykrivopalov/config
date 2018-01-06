@@ -418,3 +418,6 @@ function! LocateInAcronisProject()
 endfunction
 
 map <Leader><Leader>p :call LocateInAcronisProject()<CR>
+
+map <F1> <Esc>
+imap <F1> <Esc>
