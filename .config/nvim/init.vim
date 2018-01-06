@@ -29,6 +29,7 @@ Plug 'simeji/winresizer'  " easy resizing of vim windows
 Plug 'ton/vim-bufsurf'  " surfing through buffers based on viewing history
 Plug 'tpope/vim-commentary'  " comment stuff out
 Plug 'tpope/vim-rsi'  " readline key bindings
+Plug 'tpope/vim-eunuch'  " sugar for the UNIX shell commands
 Plug 'vim-scripts/gtags.vim'  " support for GNU global tags system
 Plug 'vim-scripts/vcscommand.vim'  " VCS integration
 Plug 'zchee/deoplete-clang'  " C/C++ source for deoplete
@@ -400,7 +401,7 @@ endfunction
 
 
 " fzf
-command! Locate call fzf#run(
+command! LocateInFilesDB call fzf#run(
       \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
 
 
@@ -412,7 +413,7 @@ function! LocateInAcronisProject()
   if !exists('g:project_path')
     execute 'FZF'
   else
-    execute ':Locate'
+    execute ':LocateInFilesDB'
   endif
 endfunction
 
