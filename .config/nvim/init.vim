@@ -15,6 +15,7 @@ Plug 'embear/vim-localvimrc'  " .localvimrc support
 Plug 'fatih/vim-go', { 'tag': '*' }  " Go development plugin for Vim
 Plug 'jlanzarotta/bufexplorer'  " buffers explorer
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
+Plug 'justinmk/vim-dirvish'  " directory viewer
 Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
 Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
 Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
@@ -63,7 +64,6 @@ set tabstop=8  " number of spaces that a <Tab> in the file counts for
 
 
 " behavior
-set autochdir  " chage current working directory whenever file opened
 set backspace=start,indent,eol  " backspacing over start of insert, autoindent, line breaks
 set hidden  " don't unload abandoned buffers
 set hlsearch  " higlight all search matches
@@ -138,7 +138,8 @@ map ; :
 map <Leader>BD :Bdelete<Enter>
 map <Leader>Bd :Bdelete<Enter>
 map <Leader>bd :bd<Enter>
-map <Leader>e :e<Enter>
+map <Leader>e :e %:h/
+map <Leader><Leader>e :e<Enter>
 map <Leader>w :w<Enter>
 
 
@@ -192,7 +193,6 @@ autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " for markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-let g:netrw_browsex_viewer = "xdg-open"
 
 
 " trailing spaces
@@ -305,6 +305,13 @@ endfunction
 
 nmap <Leader>h :call FullSwitchFile()<CR>
 
+" disable netrw
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
+" don't hide c headers
+set suffixes-=.h
+
 " xkbswitch
 let g:XkbSwitchEnabled = 1
 
@@ -322,7 +329,7 @@ autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
 " ack
 let g:ackprg = 'rg --vimgrep'
-nmap <Leader><Leader>g :Ack 
+nmap <Leader><Leader>g :Ack  %:h<Left><Left><Left><Left>
 
 
 " deoplete
@@ -403,6 +410,9 @@ endfunction
 " fzf
 command! LocateInFilesDB call fzf#run(
       \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
+
+
+command! Explore Dirvish %:h
 
 
 function! LocateInAcronisProject()
