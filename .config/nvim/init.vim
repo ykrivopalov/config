@@ -119,6 +119,8 @@ let mapleader = "\<Tab>"  " alias for the <Leader> key
 " remap for <C-i>, because it interpreted by Vim as a <Tab>
 nnoremap <C-l> <C-i>
 
+" toggles the 'paste' option, for pasting in Insert mode
+set pastetoggle=<Leader>i
 
 " substitution mappings
 map <Leader>ss :%s/
