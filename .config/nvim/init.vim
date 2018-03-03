@@ -12,7 +12,7 @@ Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
 Plug 'derekwyatt/vim-fswitch'  " switching between header and source
 Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'embear/vim-localvimrc'  " .localvimrc support
-Plug 'fatih/vim-go', { 'tag': '*' }  " Go development plugin for Vim
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }  " Go development plugin for Vim
 Plug 'jlanzarotta/bufexplorer'  " buffers explorer
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
 Plug 'justinmk/vim-dirvish'  " directory viewer
