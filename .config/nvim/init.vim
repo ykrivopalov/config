@@ -387,6 +387,8 @@ imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
 " format json buffer or selection
 nmap <Leader>fj :.,$!python -m json.tool<CR>
 vmap <Leader>fj :%!python -m json.tool<CR>
+nmap <Leader>fp :.,$!autopep8 -a -<CR>
+vmap <Leader>fp :%!autopep8 -a -<CR>
 nmap <Leader>fx :.,$!xmllint --format -<CR>
 vmap <Leader>fx :%!xmllint --format -<CR>
 
