@@ -356,6 +356,7 @@ inoremap <silent><expr> <S-TAB>
 autocmd! BufWritePost * Neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang++' }
+let g:neomake_cpp_clang_args = ['-std=c++14', '-fsyntax-only']
 
 let g:neomake_python_enabled_makers = ['pylint']
 let g:neomake_python_pylint_maker = {
