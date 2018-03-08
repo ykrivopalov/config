@@ -74,8 +74,8 @@ set wildmode=longest,list,full
 
 
 " disable automatically insertion of comments after Enter and o/O
-set formatoptions-=r
-set formatoptions-=o
+" autocmd is needed to override filetype plugins
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
 
 " status line
