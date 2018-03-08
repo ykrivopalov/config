@@ -19,7 +19,7 @@ Plug 'justinmk/vim-dirvish'  " directory viewer
 Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
 Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
 Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
-Plug 'mileszs/ack.vim'  " code grepping
+Plug 'mhinz/vim-grepper'
 Plug 'moll/vim-bbye'  " delete buffers without closing windows 
 Plug 'neomake/neomake'  " asynchronous linting and make
 Plug 'neovimhaskell/haskell-vim'  " haskell syntax highlighting
@@ -329,10 +329,10 @@ autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
 autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
 
-" ack
-let g:ackprg = 'rg --vimgrep'
-nmap <Leader><Leader>g :Ack  %:h<Left><Left><Left><Left>
-
+" vim-grepper
+let g:grepper = {}
+let g:grepper.dir = 'file'
+nmap <Leader><Leader>g :GrepperRg 
 
 " deoplete
 set completeopt-=preview " no annoying scratch preview
