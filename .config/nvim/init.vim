@@ -417,7 +417,14 @@ command! LocateInFilesDB call fzf#run(
       \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
 
 
-command! Explore Dirvish %:h
+" vim-dirvish
+augroup dirvish_config
+  autocmd!
+  autocmd FileType dirvish silent! unmap <buffer> <C-n>
+  autocmd FileType dirvish silent! unmap <buffer> <C-p>
+augroup END
+
+command! Explore Dirvish %:p:h
 
 
 function! LocateInAcronisProject()
