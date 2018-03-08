@@ -135,14 +135,16 @@ map <Leader>td $a /// @todo<Esc>
 map <Leader>te othrow Common::Error(LINE_TAG, 42); /// @todo<Esc>
 
 
-" shortcuts for editing
+" common shortcuts
 map ; :
 map <Leader>BD :Bdelete<Enter>
 map <Leader>Bd :Bdelete<Enter>
 map <Leader>bd :bd<Enter>
-map <Leader>e :e %:h/
-map <Leader><Leader>e :e<Enter>
+map <Leader>e :e<Enter>
 map <Leader>w :w<Enter>
+map ,e :e %:p:h/
+map ,w :w %:p:h/
+cabbrev h vertical botright help
 
 
 " reset editing state
