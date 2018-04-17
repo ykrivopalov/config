@@ -341,9 +341,10 @@ nmap <Leader><Leader>g :GrepperRg<Space>
 
 " deoplete
 set completeopt-=preview " no annoying scratch preview
-let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
+
+autocmd BufEnter *.{cpp,h,go,py,raml,json,vim} call deoplete#enable()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
