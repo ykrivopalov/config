@@ -198,6 +198,9 @@ autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 " for markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
+" for raml
+autocmd BufEnter *.raml setlocal foldmethod=indent
+
 
 " trailing spaces
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
