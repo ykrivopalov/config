@@ -13,14 +13,13 @@ Plug 'derekwyatt/vim-fswitch'  " switching between header and source
 Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'embear/vim-localvimrc'  " .localvimrc support
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }  " Go development plugin for Vim
-Plug 'jlanzarotta/bufexplorer'  " buffers explorer
+Plug 'jsfaint/gen_tags.vim'  " async plugin to ease the use of ctags/gtags
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }  " fuzzy file finder
 Plug 'justinmk/vim-dirvish'  " directory viewer
 Plug 'lyokha/vim-xkbswitch'  " automatic keyboard layout switching in insert mode
-Plug 'majutsushi/tagbar'  " displays tags in a window, ordered by scope
 Plug 'maxbrunsfeld/vim-yankstack'  " cached ring of yanks
-Plug 'mhinz/vim-grepper'
-Plug 'moll/vim-bbye'  " delete buffers without closing windows 
+Plug 'mhinz/vim-grepper'  " helps you win at grep
+Plug 'moll/vim-bbye'  " delete buffers without closing windows
 Plug 'neomake/neomake'  " asynchronous linting and make
 Plug 'neovimhaskell/haskell-vim'  " haskell syntax highlighting
 Plug 'racer-rust/vim-racer'  " allows vim to use Racer for Rust code completion and navigation
@@ -31,7 +30,6 @@ Plug 'ton/vim-bufsurf'  " surfing through buffers based on viewing history
 Plug 'tpope/vim-commentary'  " comment stuff out
 Plug 'tpope/vim-rsi'  " readline key bindings
 Plug 'tpope/vim-eunuch'  " sugar for the UNIX shell commands
-Plug 'vim-scripts/gtags.vim'  " support for GNU global tags system
 Plug 'vim-scripts/vcscommand.vim'  " VCS integration
 Plug 'zchee/deoplete-clang'  " C/C++ source for deoplete
 call plug#end()
@@ -156,10 +154,6 @@ map K <Nop>
 
 
 " for c++
-
-" map GtagsCursor like standard hotkey for tags
-autocmd FileType c,cpp,h,hpp nnoremap <buffer> <C-]> :cclose<CR>:Gtags -d<CR>
-
 set cinoptions+=g0  " for public/private indent
 " Add highlighting for function definition in C++
 function! EnhanceCppSyntax()
@@ -221,12 +215,18 @@ sunmap w
 sunmap b
 sunmap e
 
-map <Leader>t :TagbarToggle<Enter>
 
-map <C-\> :cclose<CR>:GtagsCursor<CR>
-map <Leader><Leader>r :cclose<CR>:Gtags -r<SPACE>
-map <Leader><Leader>d :cclose<CR>:Gtags -d<SPACE>
-map <Leader>q :cclose<CR>
+" gtags helpers
+let $GTAGSFORCECPP = ""
+set cscopequickfix=c-,g-,s-  " use quickfix window for csope
+map <Leader><Leader>d :cscope find g<Space>
+map <Leader><Leader>r :cscope find c<Space>
+map <Leader>ln :lnext<CR>
+map <Leader>lp :lprevious<CR>
+map <Leader>q :cwindow<CR>
+
+
+" for easier copy-pasting
 map - "+
 map _ "+
 map + "+
@@ -337,7 +337,7 @@ autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 " vim-grepper
 let g:grepper = {}
 let g:grepper.dir = 'file'
-nmap <Leader><Leader>g :GrepperRg 
+nmap <Leader><Leader>g :GrepperRg<Space>
 
 " deoplete
 set completeopt-=preview " no annoying scratch preview
