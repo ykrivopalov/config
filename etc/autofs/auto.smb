@@ -34,7 +34,7 @@ IFS=":" read USERNAME PASSWORD << EOF
 EOF
 
 smbopts="-U $USERNAME%$PASSWORD"
-if [ $key="ru-fs" ]
+if [ "$key" == "ru-fs" ]
 then smbopts="$smbopts"" -mNT1"
 fi
 
@@ -46,7 +46,7 @@ EOF
 fi
 
 opts="$opts"',uid=$UID,gid=$GID,username='"$USERNAME,password=$PASSWORD"
-if [ $key="ru-fs" ]
+if [ "$key" == "ru-fs" ]
 then opts="$opts"",vers=1.0"
 fi
 
