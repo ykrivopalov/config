@@ -142,7 +142,11 @@ map <Leader>e :e<Enter>
 map <Leader>w :w<Enter>
 map ,e :e %:p:h/
 map ,w :w %:p:h/
-cabbrev h vertical botright help
+
+
+" vertical splitting creates new panel on the right
+nnoremap <C-w>v :botright vsplit<CR>
+cabbrev h vert bo h
 
 
 " reset editing state
