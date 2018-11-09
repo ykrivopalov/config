@@ -397,23 +397,9 @@ vmap <Leader>fx :!xmllint --format -<CR>
 nmap cp :let @a = expand("%:p")<CR>:let @+ = expand("%:p")<CR>:let @" = expand("%:p")<CR>
 
 
-" setup for Acronis project
-function! InitAcronisProject()
-  let l:path = findfile('family.xml', '.;')
-  if (empty(l:path))
-    echo "Project file not found"
-  else
-    let l:path = fnamemodify(l:path, ":p:h")
-    let g:project_path = l:path
-    execute ':abbreviate PRJ ' . g:project_path
-    execute ':set path=' . '.,' . l:path . ',' . l:path . '/include,' . l:path . '/text,' . l:path . '/ext/include,' . l:path . '/core,' . l:path . '/core/include'
-  endif
-endfunction
-
-
 " fzf
 command! LocateInFilesDB call fzf#run(
-      \ {'source': 'locate -d ' . g:project_path . '/files.db "*"', 'sink': 'e', 'window': 'new'})
+      \ {'source': 'locate -d ' . 'files.db "*"', 'sink': 'e', 'window': 'new'})
 
 
 " vim-dirvish
@@ -426,19 +412,15 @@ augroup END
 command! Explore Dirvish %:p:h
 
 
-function! LocateInAcronisProject()
-  " init project path before search
-  if !exists('g:project_path')
-    call InitAcronisProject()
-  endif
-  if !exists('g:project_path')
-    execute 'FZF'
-  else
+function! LocateImpl()
+  if filereadable('files.db')
     execute ':LocateInFilesDB'
+  else
+    execute 'FZF'
   endif
 endfunction
 
-map <Leader><Leader>p :call LocateInAcronisProject()<CR>
+map <Leader><Leader>p :call LocateImpl()<CR>
 
 map <F1> <Esc>
 imap <F1> <Esc>
