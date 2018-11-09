@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'IN3D/vim-raml'  " syntax and language settings for RAML
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " keyword completion
 Plug 'bkad/CamelCaseMotion'  " motion through CamelCaseWords
+Plug 'davidhalter/jedi-vim'
 Plug 'derekwyatt/vim-fswitch'  " switching between header and source
 Plug 'dkasak/gruvbox'  " color scheme (it's fork with better haskell support)
 Plug 'embear/vim-localvimrc'  " .localvimrc support
@@ -180,6 +181,7 @@ autocmd BufEnter *.{hs,cabal} setlocal cmdheight=1
 " for python
 autocmd BufEnter *.{py} setlocal shiftwidth=4
 autocmd BufEnter *.{py} setlocal softtabstop=4
+let g:jedi#goto_command = "<C-]>"
 
 " for go
 autocmd BufEnter *.{go} setlocal shiftwidth=4
