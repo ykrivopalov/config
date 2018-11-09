@@ -381,6 +381,7 @@ let g:neomake_python_pylint_maker = {
   \ }
 " Compilation flags placed in local vimrc for each project separately
 
+let g:neomake_go_enabled_makers = ['go']
 
 " localvimrc
 let g:localvimrc_ask = 0 " don't ask confirmation for local vimrc loading
