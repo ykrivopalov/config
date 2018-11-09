@@ -373,8 +373,6 @@ let g:neomake_cpp_clang_args = ['-std=c++14', '-fsyntax-only']
 let g:neomake_python_enabled_makers = ['pylint']
 let g:neomake_python_pylint_maker = {
   \ 'args': [
-  \ '-d', 'C0301',
-  \ '-d', 'C0103',
   \ '-f', 'text',
   \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
   \ '-r', 'n'
