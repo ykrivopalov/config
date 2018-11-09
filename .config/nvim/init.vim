@@ -303,21 +303,11 @@ autocmd BufEnter *.cc let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,inc
 autocmd BufEnter *.c let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.h let b:fswitchdst = 'cpp,c,cc' | let b:fswitchlocs = '.,..,impl,../impl,src,../src,../source'
 
-
 " Acronis localization files
-autocmd BufEnter text.h let b:fullswitchdst = 'english.txt'
-autocmd BufEnter english.txt let b:fullswitchdst = 'text.h'
+autocmd BufEnter text.h let b:fswitchdst = 'txt' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/.*/english/'
+autocmd BufEnter english.txt let b:fswitchdst = 'h' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/.*/text/'
 
-" Switch that support Acronis files
-function! FullSwitchFile()
-  if exists('b:fullswitchdst')
-    execute ":e " . b:fullswitchdst
-  else
-    execute ':FSHere'
-  endif
-endfunction
-
-nmap <Leader>h :call FullSwitchFile()<CR>
+nmap <Leader>h :FSHere<CR>
 
 " disable netrw
 let g:loaded_netrw = 1
