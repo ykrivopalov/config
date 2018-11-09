@@ -390,18 +390,15 @@ let g:autofenc_ext_prog_path='enca_vim.sh'
 let g:autofenc_ext_prog_args=''
 
 
-" format buffer with clang
-map <C-K> :pyf /usr/share/clang/clang-format.py<CR>
-imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<CR>
-
-
-" format json buffer or selection
-nmap <Leader>fj :.,$!python -m json.tool<CR>
-vmap <Leader>fj :%!python -m json.tool<CR>
-nmap <Leader>fp :.,$!autopep8 -a -<CR>
-vmap <Leader>fp :%!autopep8 -a -<CR>
-nmap <Leader>fx :.,$!xmllint --format -<CR>
-vmap <Leader>fx :%!xmllint --format -<CR>
+" format buffer or selection
+nmap <Leader>fc :%py3file /usr/share/clang/clang-format.py<CR>
+vmap <Leader>fc :py3file /usr/share/clang/clang-format.py<CR>
+nmap <Leader>fj :%!python -m json.tool<CR>
+vmap <Leader>fj :!python -m json.tool<CR>
+nmap <Leader>fp :%!autopep8 -a -<CR>
+vmap <Leader>fp :!autopep8 -a -<CR>
+nmap <Leader>fx :%!xmllint --format -<CR>
+vmap <Leader>fx :!xmllint --format -<CR>
 
 
 " copy current path
