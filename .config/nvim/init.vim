@@ -303,6 +303,10 @@ autocmd BufEnter *.cc let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,inc
 autocmd BufEnter *.c let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
 autocmd BufEnter *.h let b:fswitchdst = 'cpp,c,cc' | let b:fswitchlocs = '.,..,impl,../impl,src,../src,../source'
 
+" go tests
+autocmd BufEnter *.go let b:fswitchdst = 'go' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/$/_test/'
+autocmd BufEnter *_test.go let b:fswitchdst = 'go' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/_test$//'
+
 " Acronis localization files
 autocmd BufEnter text.h let b:fswitchdst = 'txt' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/.*/english/'
 autocmd BufEnter english.txt let b:fswitchdst = 'h' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/.*/text/'
