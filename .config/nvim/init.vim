@@ -224,6 +224,7 @@ sunmap e
 
 
 " gtags helpers
+let g:gen_tags#gtags_auto_update = 0
 let $GTAGSFORCECPP = ""
 set cscopequickfix=c-,g-,s-  " use quickfix window for csope
 map <Leader><Leader>d :cscope find g<Space>
