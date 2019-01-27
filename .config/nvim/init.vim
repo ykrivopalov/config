@@ -308,11 +308,8 @@ autocmd BufEnter *.h let b:fswitchdst = 'cpp,c,cc' | let b:fswitchlocs = '.,..,i
 autocmd BufEnter *.go let b:fswitchdst = 'go' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/$/_test/'
 autocmd BufEnter *_test.go let b:fswitchdst = 'go' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/_test$//'
 
-" Acronis localization files
-autocmd BufEnter text.h let b:fswitchdst = 'txt' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/.*/english/'
-autocmd BufEnter english.txt let b:fswitchdst = 'h' | let b:fswitchlocs = '.' | let b:fswitchfnames = '/.*/text/'
-
 nmap <Leader>h :FSHere<CR>
+
 
 " disable netrw
 let g:loaded_netrw = 1
@@ -327,13 +324,6 @@ let g:XkbSwitchEnabled = 1
 " yankstack
 nmap <Leader>p <Plug>yankstack_substitute_older_paste
 nmap <Leader>n <Plug>yankstack_substitute_newer_paste
-
-
-" new file skeletons
-autocmd BufNewFile *.cpp 0r ~/.config/nvim/skel/cpp.skel
-autocmd BufNewFile *.h 0r ~/.config/nvim/skel/h.skel
-autocmd BufNewFile *.ion 0r ~/.config/nvim/skel/ion.skel
-autocmd BufNewFile *.xidl 0r ~/.config/nvim/skel/xidl.skel
 
 
 " vim-grepper
