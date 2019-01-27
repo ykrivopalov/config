@@ -32,7 +32,6 @@ Plug 'tpope/vim-commentary'  " comment stuff out
 Plug 'tpope/vim-rsi'  " readline key bindings
 Plug 'tpope/vim-eunuch'  " sugar for the UNIX shell commands
 Plug 'vim-scripts/vcscommand.vim'  " VCS integration
-Plug 'zchee/deoplete-clang'  " C/C++ source for deoplete
 call plug#end()
 
 
@@ -336,9 +335,6 @@ nmap <Leader><Leader>g :GrepperRg<Space>
 
 " deoplete
 set completeopt-=preview " no annoying scratch preview
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
-
 autocmd BufEnter *.{cpp,h,go,py,raml,json,vim} call deoplete#enable()
 
 function! s:check_back_space() abort
