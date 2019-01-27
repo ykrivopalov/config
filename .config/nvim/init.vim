@@ -188,6 +188,9 @@ autocmd BufEnter *.{go} setlocal shiftwidth=4
 autocmd BufEnter *.{go} setlocal noexpandtab
 autocmd BufEnter *.{go} setlocal softtabstop=0
 autocmd BufEnter *.{go} setlocal tabstop=4
+autocmd FileType go nmap <leader>gd <Plug>(go-doc)
+autocmd FileType go nmap <leader>gi <Plug>(go-implements)
+autocmd FileType go nmap <leader>gc <Plug>(go-callers)
 
 " for rust
 autocmd FileType rust nmap gd <Plug>(rust-def)
