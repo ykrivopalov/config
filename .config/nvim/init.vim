@@ -243,63 +243,6 @@ map _ "+
 map + "+
 
 
-function! GetVisualSelection()
-  try
-    let a_save = @a
-    normal! gv"ay
-    return @a
-  finally
-    let @a = a_save
-  endtry
-endfunction
-
-" python scripting
-if has('python')
-python << endpython
-
-from datetime import datetime
-import vim
-
-def convert_unixtime(unixtime):
-  return datetime.fromtimestamp(unixtime).strftime('%Y-%m-%d %H:%M:%S')
-
-def convert_windows_path(path):
-  return '/smb' + path.replace('\\', '/').replace('//', '/')
-
-def convert_unix_path(path):
-  if path[:4] == 'smb:':
-    path = path[4:]
-  return path.replace('/', '\\')
-
-def convert_path(path):
-  if path.find('\\') != -1:
-    path = convert_windows_path(path)
-  else:
-    path = convert_unix_path(path)
-  print path
-
-def convert_selected():
-  path = vim.eval('GetVisualSelection()')
-  result = ""
-  if path.isdigit():
-    result = convert_unixtime(int(path))
-  else:
-    result = convert_path(path)
-  print result
-
-endpython
-
-  " time conversion helpers
-  function! ConvertSelected()
-    redir @+>
-    python convert_selected()
-    redir END
-  endfunction
-
-  vmap <Leader>vc :call ConvertSelected()<CR>
-endif
-
-
 " header/source switches
 let g:fsnonewfiles = 'on'
 autocmd BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,..,include,../include'
