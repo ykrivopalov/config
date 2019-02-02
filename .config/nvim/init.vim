@@ -32,6 +32,7 @@ Plug 'tpope/vim-commentary'  " comment stuff out
 Plug 'tpope/vim-rsi'  " readline key bindings
 Plug 'tpope/vim-eunuch'  " sugar for the UNIX shell commands
 Plug 'vim-scripts/vcscommand.vim'  " VCS integration
+Plug 'ykrivopalov/nvim-md-utils'  " utils to simplify working with markdown in neovim
 call plug#end()
 
 
