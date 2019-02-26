@@ -153,16 +153,19 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # audio
-bindsym $mod+x exec --no-startup-id "pulseaudio-ctl up"
-bindsym $mod+z exec --no-startup-id "pulseaudio-ctl down"
+bindsym $mod+x exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym $mod+z exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym $mod+c exec --no-startup-id "deadbeef --play-pause"
 
 bindsym $mod+t exec --no-startup-id "gsimplecal"
 
 bindsym $mod+Shift+semicolon exec --no-startup-id "i3lock"
 
-bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 1"
-bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 1"
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl s +10"
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl s 10-"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
